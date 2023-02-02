@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<!-- react js, dom import-->
+<!-- react를 설치하기 위한 javascript code url-->
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<!-- react dom : 모든 react element들을 HTML body에 둘 수 있도록 해줌-->
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script>
+    const root = document.getElementById("root")
+    // props object
+    const h3 = React.createElement("h3",
+        {
+            onMouseEnter: () => console.log("mouse enter")
+        }
+        , "span example!");
+    const btn = React.createElement("button",
+        {
+            onClick: () => console.log("clicked"),
+            style: {
+                backgroundColor: "red"
+            }
+        }
+        , "Click");
+    const container = React.createElement("div", null, [h3, btn]);
+    ReactDOM.render(container, root);
+</script>
+
+</html>

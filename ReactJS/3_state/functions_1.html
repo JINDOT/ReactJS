@@ -1,0 +1,45 @@
+<!-- Way 2 -->
+<!-- the best Way -->
+<!-- inputs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<!-- react js, dom import-->
+<!-- react를 설치하기 위한 javascript code url-->
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<!-- react dom : 모든 react element들을 HTML body에 둘 수 있도록 해줌-->
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<!-- Load Babel -->
+<!-- JSX는 브라우저가 읽지 못하므로 바벨을 통해 브라우저가 이해하도록 설정-->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.getElementById("root");
+
+    function App() {
+        const [counter, setCounter] = React.useState(0);
+        const onClick = () => {
+            // setCounter(counter + 1);
+            // 1번쨰 argument = 현재 값
+            setCounter((current) => current + 1);
+        };
+        return (
+            <div>
+                <h3>Total Count :{counter}</h3>
+                <button onClick={onClick}>Click</button>
+            </div>
+        );
+    };
+    ReactDOM.render(<App />, root);
+</script>
+
+</html>

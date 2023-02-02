@@ -1,0 +1,78 @@
+<!-- inputs & state -->
+<!-- unit conversion-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.getElementById("root");
+    function App() {
+        // State
+        // useState : array 제공, 첫 번째 element가 current 값
+        //                        두 번째 update
+        const [minutes, setMinutes] = React.useState(0)
+        const [flipped, setFlipped] = React.useState(false);
+        // state update
+        const onChange = (event) => {
+            setMinutes(event.target.value);
+        };
+        // reset button의 onClick event가 실행 되면서 값이 0으로 초기화
+        const reset = () => setMinutes(0);
+        // current 값을 !(not)으로 반전 시킴
+        const onFlip = () => {
+            reset();
+            setFlipped((current) => !current);
+        };
+        return (
+            <div>
+                <h1>Converter</h1>
+                <lable htmlFor="minutes">Minutes</lable>
+                <input
+                    // minute 값 입력
+                    value={flipped ? minutes * 60 : minutes}
+                    id="minutes"
+                    placeholder="Minutes"
+                    type="number"
+                    // state update
+                    onChange={onChange}
+                    disabled={flipped}
+                />
+                <h3>you want convert {minutes} minutes</h3>
+                <lable htmlFor="hours">Hours</lable>
+                <input
+                    // 변환된 시간 값은 바뀌지 않는다.
+                    // onChange로 변환할 수 있도록 만들지 않았기 때문
+                    // value={minutes / 60}
+                    // filpped true => state, false => changed value
+                    value={flipped ? minutes : Math.round(minutes / 60)}
+                    id="hours"
+                    placeholder="Hours"
+                    type="number"
+                    // 값을 입력 못하도록 막음
+                    disabled={!flipped}
+                    // flipped로 변경될 경우 값 입력가능
+                    onChange={onChange}
+                />
+                <div>
+                    <button onClick={reset}>Reset</button>
+                    <button onClick={onFlip}>Flip</button>
+                </div>
+            </div>
+        );
+    };
+    ReactDOM.render(<App />, root);
+</script>
+
+</html>

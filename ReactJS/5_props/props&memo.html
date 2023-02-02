@@ -1,0 +1,72 @@
+<!-- props -->
+<!-- memo -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.getElementById("root");
+    // JSX내부에서 의 Btn component에서 object 형식으로 받음
+    // {props.text} : Btn에 text(props)의 값을 집어넣어줌
+    // 같은 props를 가지더라도 다른 인자를 가질 수 있음
+    // ex) big props
+    // Btn이라는 함수 하나로 여러 버튼을 생성(재활용)
+    function Btn({ text, onClick }) {
+        return <button
+            onClick={onClick}
+            style={{
+                // object type
+                backgroundColor: "orange",
+                color: "white",
+                padding: "10px 20px",
+                border: 0,
+                borderRadius: 10,
+
+            }}> {text}</button>
+    };
+    /*
+    function ConfirmBtn() {
+        return <button style={{
+            // object type
+            backgroundColor: "orange",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10
+        }
+        } >Confirm</button>
+    }
+    */
+    // 부모 컴포넌트에 state가 변경된다면 자식 컴포넌트는 전부 리랜더링
+    // 변화가 있는 값만 리랜더링
+    const MemorizedBtn = React.memo(Btn);
+    function App() {
+        const [value, setValue] = React.useState("Save")
+        const changeValue = () => setValue("Revert")
+        return (
+            // JSX 내부
+            // component
+            // 이 곳에 아무리 props를 적어 놓아도 위에서 설정하지 않으면
+            // 작동 X
+            <div>
+                <MemorizedBtn text={value} onClick={changeValue} />
+                <MemorizedBtn text="Continue" />
+            </div>
+        );
+    };
+    ReactDOM.render(<App />, root);
+</script>
+
+</html>

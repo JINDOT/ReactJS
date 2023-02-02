@@ -1,0 +1,49 @@
+<!-- Way 1 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<!-- react js, dom import-->
+<!-- react를 설치하기 위한 javascript code url-->
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<!-- react dom : 모든 react element들을 HTML body에 둘 수 있도록 해줌-->
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<!-- Load Babel -->
+<!-- JSX는 브라우저가 읽지 못하므로 바벨을 통해 브라우저가 이해하도록 설정-->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.getElementById("root");
+    let counter = 0;
+    function countUp() {
+        counter = counter + 1;
+        // 카운터 증가 후 출력될 부분
+        render();
+    }
+    // UI Update : 카운터가 하나 증가할때마다 리랜더링
+    function render() {
+        ReactDOM.render(<Container />, root);
+    }
+    // 버튼에 클릭 리스너를 연결
+    // UI 업데이트가 되지 않는다.
+    function Container() {
+        return (
+            <div>
+                <h3>Total Count : {counter}</h3>
+                <button onClick={countUp}>Click</button>
+            </div>
+        );
+    };
+    // 렌더링이 연결된 요소만을 변경해준다!
+    render();
+</script>
+
+</html>
